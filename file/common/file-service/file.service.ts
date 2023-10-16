@@ -5,17 +5,32 @@ import { FileServiceError } from './file.common';
 import { FileCreatePayload, FileServiceInitType } from './file.type';
 
 /**
- * Helper class to create, store and retrive file
+ * Abstract base class for file services
  */
 export abstract class FileService<P> {
+  /**
+   * @param {FileServiceInitType} options - Options for initializing service
+   */
   constructor(private readonly options: FileServiceInitType) {
     if (options.isReplaceable === undefined) {
       options.isReplaceable = true;
     }
   }
 
+  /**
+   * Creates a buffer from the payload
+   * @abstract
+   * @param {P} payload - Payload to create buffer from
+   * @returns {Promise<Buffer>}
+   */
   abstract createBuffer(payload: P): Promise<Buffer>;
 
+  /**
+   * Create and save a file with given filename and payload
+   * @param {string} fileName - Name of file
+   * @param {FileCreatePayload<P>} options - Options
+   * @returns {Promise<void>}
+   */
   async createFile(
     fileName: string,
     {
@@ -79,7 +94,7 @@ export abstract class FileService<P> {
       'Content-Length': buffer.length,
       'Cache-Control': 'no-cache, no-store, must-revalidate',
       Pragma: 'no-cache',
-      Expires: 0
+      Expires: 0,
     };
   }
 
@@ -97,6 +112,11 @@ export abstract class FileService<P> {
 
   // ------------------------------------------------------------------------------------
 
+  /**
+   * Validates the file name
+   * @param {string} fileName
+   * @throws {Error} if invalid
+   */
   validateFileName(fileName: string) {
     if (!fileName || fileName.endsWith(`.${this.options.fileExtention}`)) {
       throw new Error(FileServiceError.INVALID_FILE_NAME);
