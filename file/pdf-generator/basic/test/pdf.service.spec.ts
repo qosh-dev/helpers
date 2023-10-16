@@ -31,11 +31,11 @@ describe('PdfService', () => {
     });
     // Check file exists
     const filePath = service.getFilePath(fileName);
-    const fileExtention = filePath.substring(
+    const extention = filePath.substring(
       filePath.length - 3,
       filePath.length
     );
-    expect(fileExtention).toBe('pdf');
+    expect(extention).toBe('pdf');
     const isFileExist = fs.existsSync(filePath);
     expect(isFileExist).toBe(true);
     generatedFilePath = filePath;

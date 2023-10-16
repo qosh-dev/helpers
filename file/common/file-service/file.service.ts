@@ -64,18 +64,18 @@ export abstract class FileService<P> {
   }
 
   getFilePath(fileName: string): string {
-    const { localStoredDir, fileExtention } = this.options;
+    const { localStoredDir, extention } = this.options;
     this.validateFileName(fileName);
-    return path.join(localStoredDir, `${fileName}.${fileExtention}`);
+    return path.join(localStoredDir, `${fileName}.${extention}`);
   }
 
   /**
    * @example http://localhost:3001/gnn/pdf/EE6A_1697128482673_2_136A551A9E.pdf
    */
   getFilePublicPath(fileName: string): string {
-    const { remoteStoredPath, fileExtention } = this.options;
+    const { remoteStoredPath, extention } = this.options;
     this.validateFileName(fileName);
-    return remoteStoredPath + `/${fileName}.${fileExtention}`;
+    return remoteStoredPath + `/${fileName}.${extention}`;
   }
 
   /**
@@ -86,11 +86,11 @@ export abstract class FileService<P> {
     fileName: string,
     buffer: Buffer
   ): { [n in string]: number | string } {
-    const { fileExtention } = this.options;
+    const { extention } = this.options;
     this.validateFileName(fileName);
     return {
-      'Content-Type': `application/${fileExtention}`,
-      'Content-Disposition': `attachment; filename=${fileName}.${fileExtention}`,
+      'Content-Type': `application/${extention}`,
+      'Content-Disposition': `attachment; filename=${fileName}.${extention}`,
       'Content-Length': buffer.length,
       'Cache-Control': 'no-cache, no-store, must-revalidate',
       Pragma: 'no-cache',
@@ -118,7 +118,7 @@ export abstract class FileService<P> {
    * @throws {Error} if invalid
    */
   validateFileName(fileName: string) {
-    if (!fileName || fileName.endsWith(`.${this.options.fileExtention}`)) {
+    if (!fileName || fileName.endsWith(`.${this.options.extention}`)) {
       throw new Error(FileServiceError.INVALID_FILE_NAME);
     }
   }

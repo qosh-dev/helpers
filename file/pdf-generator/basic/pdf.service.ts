@@ -16,7 +16,7 @@ export class PdfService extends FileService<PdfPayload> {
     super({
       localStoredDir: config.dirs.pdf,
       remoteStoredPath: config.urls.pdf,
-      fileExtention: 'pdf',
+      extention: 'pdf',
       isReplaceable: false
     });
   }

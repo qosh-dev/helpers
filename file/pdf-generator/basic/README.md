@@ -17,7 +17,6 @@
   apt-get install google-chrome-stable -y --no-install-recommends && \
   rm -rf /var/lib/apt/lists/*
 
-
 # Using example
 
 <code>

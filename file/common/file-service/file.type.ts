@@ -1,7 +1,7 @@
 export type FileServiceInitType = {
   readonly localStoredDir: string;
   readonly remoteStoredPath: string;
-  readonly fileExtention: string;
+  readonly extention: string;
   /**
    * Indicates that file will be overwritten, if file with same name exist
    * @default true
