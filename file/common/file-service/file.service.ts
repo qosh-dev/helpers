@@ -1,8 +1,8 @@
 import { Logger } from '@nestjs/common';
 import * as fsPromise from 'fs/promises';
 import * as path from 'path';
-import { FileServiceError } from './file-service.common';
-import { FileCreatePayload, FileServiceInitType } from './file-service.type';
+import { FileServiceError } from './file.common';
+import { FileCreatePayload, FileServiceInitType } from './file.type';
 
 /**
  * Helper class to create, store and retrive file
