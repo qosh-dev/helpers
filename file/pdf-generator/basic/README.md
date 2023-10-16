@@ -16,3 +16,27 @@
   apt-get update && \
   apt-get install google-chrome-stable -y --no-install-recommends && \
   rm -rf /var/lib/apt/lists/*
+
+
+# Using example
+
+<code>
+
+constructor(
+  private readonly pdfService: PdfService
+) {}
+
+// Handlebars template
+
+await this.pdfService.createFile(fileName, {
+  data: { title: "TEST" }, 
+  templateName: 'test.hbs'
+});
+
+// Html file
+
+await this.pdfService.createFile(fileName, {
+  templateName: 'test.html'
+});
+
+</code>
