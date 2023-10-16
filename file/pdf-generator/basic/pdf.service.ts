@@ -5,6 +5,7 @@ import * as puppeteer from 'puppeteer';
 import { ConfigService } from '../../shared/config/config.service';
 import { FileService } from '../../shared/file-service/file-service';
 import { BaseUtils } from '../../utils/base.utils';
+import { PDFError } from './pdf.common';
 import { PDFTemplateExtentions, PdfPayload } from './pdf.types';
 
 @Injectable()
@@ -13,8 +14,8 @@ export class PdfService extends FileService<PdfPayload> {
 
   constructor(readonly config: ConfigService) {
     super({
-      localStoredDir: 'src/files/pdf',
-      remoteStoredPath: "http://localhost:3001/pdf",
+      localStoredDir: config.dirs.pdf,
+      remoteStoredPath: config.urls.pdf,
       fileExtention: 'pdf',
       isReplaceable: false
     });
@@ -82,7 +83,7 @@ export class PdfService extends FileService<PdfPayload> {
     );
     const isExtentionSupport = allowedExtentions.includes(templateExtention);
     if (!isExtentionSupport) {
-      throw Error('Unsupported template');
+      throw Error(PDFError.UNSUPPORTED_TEMPLATE);
     }
     return templateExtention;
   }
