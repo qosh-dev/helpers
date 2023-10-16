@@ -1,0 +1,4 @@
+export enum FileServiceError  {
+  FILE_NOT_FOUND = "FILE_NOT_FOUND",
+  INVALID_FILE_NAME = "INVALID_FILE_NAME"
+}
