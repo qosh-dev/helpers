@@ -26,3 +26,7 @@ specify env variables
 
 and specify /.env volume 
 script will add NGROK_URL variables
+
+
+
+! Work with M1 processors
